@@ -1,0 +1,420 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage{graphicx}
+\graphicspath{ {./Imagenes/} }
+\usepackage[utf8]{inputenc}
+\begin{document}	
+\begin{titlepage}	
+	\begin{center}
+		Año 2019\\
+		\bigskip
+		\begin{center}
+		\includegraphics[scale=0.5]{Imagenes/UNR.png}
+		\end{center}
+		\bigskip
+		{\LARGE UNIVERSIDAD NACIONAL DE ROSARIO}\\
+		\bigskip
+		FACULTAD DE CIENCIAS EXACTAS INGENIERÍA Y AGRIMENSURA \\
+		\bigskip
+		\underline{Cátedra:}Probabilidad y Estadística \\
+		\bigskip
+		\bigskip
+		\begin{Large}
+			TRABAJO PRÁCTICO FINAL: Cadenas de Markov \\
+		\end{Large}
+		\bigskip
+		\bigskip
+		\bigskip
+		\bigskip\bigskip
+		\bigskip
+		{\large\textbf{Genga, Cristian}}
+		
+	\end{center}	
+\end{titlepage}
+\newpage
+\pagenumbering{arabic}
+\begin{center}
+    {\underline{\LARGE\textsf{Ejercicio Número 1:}}}
+\end{center}\\
+En cada ronda de un juego, un jugador gana \$1, con probabilidad \textit{p}, o pierde \$1, con probabilidad \textit{1-p}. El jugador comienza con 
+\$\textit{k}. El juego se detiene cuando el jugador pierde todo su dinero o gana un total de \$\textit{n}, donde $n>k$. Las fortunas sucesivas del jugador forman una cadena de Markov en \{0,1,...,n\} con $X_0 = k.$
+\begin{center}
+    \includegraphics[scale=0.7]{Imagenes/Ej1/ej1pref.JPG}
+\end{center}
+(a) Simular la ruina del jugador para una inversión inicial de \$2, jugando un juego justo.\\
+\\
+A continuación, se simulará una única partida en la cual el jugador inicia con un monto de \$2, gana con un monto de \$15 y la probabilidad de ganar como de perder coincide en 0,5.
+\begin{center}
+    \includegraphics[scale=0.7]{Imagenes/Ej1/ej1a.JPG}
+\end{center}
+En el siguiente gráfico se puede observar una simulación de 30 juegos. Los cuales muestran que es más prominente llegar a la ruina que a ganar el juego.
+\begin{center}
+    \includegraphics[scale=0.7]{Imagenes/Ej1/Rplot1a.jpeg}
+    \includegraphics[scale=0.7]{Imagenes/Ej1/ej1a1.JPG}
+\end{center}
+Como se puede observar de 30 juegos simulados, solo se obtuvo la victoria en 4 de ellos.\\
+\\
+(b) Estimar la probabilidad de que el jugador llegue a la ruina antes de ganar \$5.\\
+A continuación se realizarán diferentes estimaciones respecto a la probabilidad de que el jugador llegue a la ruina antes de ganar \$5, partiendo de un monto inicial de \$2. Se estimara en todos los casos con 5000 juegos y luego se calculará su media para obtenerla.\\
+Probabilidad de ruina:
+\begin{itemize}
+    \item Jugando un juego justo: 0.6046
+    \item Jugando con probabilidad de ganar igual a 0.2: 0.984
+    \item Jugando con probabilidad de ganar igual a 0.8: 0.0646
+    \item Jugando con probabilidad de ganar igual a 0.95: 0.022
+\end{itemize}
+\begin{center}
+    \includegraphics[scale=0.7]{Imagenes/Ej1/ej1b.JPG}
+\end{center}
+(c) Construir la matriz de transición para la cadena de markov asociada. Estimar la probabilidad en (a) calculando potencias altas de la matriz.
+\\
+\begin{center}
+    \includegraphics[scale=0.3]{Imagenes/Ej1/matriz1c.JPG}
+\end{center}
+Al estimar la probabilidad de caer en la ruina iniciando el juego con \$2 con varias potencias altas se obtiene:
+\begin{itemize}
+    \item Con potencia n=10: 0.5371094
+    \item Con potencia n=50: 0.5999869
+    \item Con potencia n=100: 0.6
+    \item Con potencia n=500: 0.6
+\end{itemize}
+\begin{center}
+    \includegraphics[scale = 0.7]{Imagenes/Ej1/1c1.JPG}
+\end{center}
+(d) Comparar los resultados con la probabilidad exacta.
+\\
+En un juego justo, la probabilidad de que el jugador llegue a la ruina  es (n-k)/n. La probabilidad exacta de llegar a la ruina comenzando con \$2, antes de ganar \$5 es (5-2)/5 = 0.6
+\\
+\begin{center}
+    {\underline{\LARGE\textsf{Ejercicio Número 2:}}}
+\end{center}\\
+En las aplicaciones de seguridad informática, un honeypot(o sistema trampa) es una herramienta dispuesta en una red o sistema informático para ser el objetivo de un posible ataque informático, y así poder detectarlo y obtener información del mismo y del atacante. Los datos del honeypot, son estudiados utilizando cadenas de markov. Se obtienen datos desde una base de datos central y se observan ataques contra cuatro puertos de computadoras - 80,135,139 y 145- durante un año. Los estados de la cadena de markov son los cuatros puertos y se incluye un nodo indicando que ningún puerto está siendo atacado (NA). Los datos se monitorean semanalmente y el puerto más atacado durante la semana es guardado. La matriz de transición para la cadena estimada para los ataques semanales es la siguiente:
+\begin{center}
+    \includegraphics[scale=0.3]{Imagenes/EJ2/ej2.JPG}
+\end{center}
+La distribución inicial es a = (0,0,0,0,1).\\
+\\
+(a) Después de dos semanas,¿cuáles son los puertos con más y menos probabilidad de ser atacados?\\
+\\
+Luego de dos semanas se obtuvo que el puerto con más probabilidad de ser atacado es el 139, donde $P(X_2=139)=0.3868007$ , a la vez que el puerto con menos probabilidad de serlo es el 80, con $P(X_2=80)= 0.03125$ .
+\begin{center}
+    \includegraphics[scale=0.7]{Imagenes/EJ2/itema.JPG}
+\end{center}
+\\
+(b) Encontrar la distribución límite (si es que existe) de los puertos atacados. Justificar.
+\\
+Al analizar la cadena correspondiente se obtuvo que es irreducible y que además su período es 1, lo cual se puede afirmar que es aperíodica. En base a estas dos condiciones se puede hallar la distribución límite de los puertos atacados, la cual corresponde a:
+\begin{itemize}
+    \item P(80) = 0.02146667
+    \item P(135) = 0.2669333
+    \item P(139) = 0.3434667
+    \item P(145) = 0.2273333
+    \item P(NA) = 0.1408
+\end{itemize}
+\begin{center}
+    \includegraphics[scale = 0.7]{Imagenes/EJ2/itemb.JPG}
+    \includegraphics[scale=0.7]{Imagenes/EJ2/grafo.jpeg}
+\end{center}
+\\
+\begin{center}
+    {\underline{\LARGE\textsf{Ejercicio Número 3:}}}
+\end{center}
+\\
+Dans et al.(2012) estudian el comportamiento de delfines en presencia de embarcaciones turísticas en la Patagonia Argentina. Para ello postulan un modelo de cadena de Markov, con espacio de estados conformado por las 5 actividades primarias de los delfines: socializar(s), viajar(t), merodear(m), alimentarse(f), descansar(r), obteniendo la siguiente matriz de transición:
+\begin{center}
+    \includegraphics[scale=0.3]{Imagenes/EJ3/matriz.JPG}
+\end{center}
+(a) Clasificar los estados.\\
+\\
+Todos los estados de la correspondiente cadena de markov se clasifican como recurrentes y cerrados. La periodicidad de todos los estados es igual a 1, lo cual clasifica a la cadena como aperiódica, y se obtuvo que es irreducible.
+\begin{center}
+    \includegraphics[scale=0.7]{Imagenes/EJ3/1a.JPG}
+    \includegraphics[scale=0.7]{Imagenes/EJ3/grafoej3.jpeg}
+\end{center}
+\\
+(b) Estimar la distribución a largo plazo de la actividad de los delfines.\\
+\\
+Como se obtuvo que la cadena es irreducible y aperíodica, podemos estimar la distribución a largo plazo, la cual corresponde a:
+\begin{itemize}
+    \item P(S) = 0.1478358 
+    \item P(T) = 0.4149254
+    \item P(M) = 0.0955597
+    \item P(A) = 0.2163806
+    \item P(R) = 0.1252985
+\end{itemize}
+\begin{center}
+    \includegraphics[scale=0.7]{Imagenes/EJ3/1b.JPG}
+\end{center}
+\\
+(c) Simular y graficar una trayectoria de dicho proceso.\\
+\\
+A continuación se realizará una simulación respecto al comportamiento de los delfines de longitud n=100, y probabilidad inicial equivalente para todos los estados.
+\begin{center}
+    \includegraphics[scale=0.7]{Imagenes/EJ3/c.JPG}  
+    \includegraphics[scale=0.7]{trayc.jpeg}
+\end{center}
+\begin{center}
+    {\underline{\LARGE\textsf{Ejercicio Número 4:}}}
+    \includegraphics[scale=0.7]{Imagenes/EJ4/enun.JPG}
+\end{center}
+Simular 50 pasos de caminata aleatoria en el grafo correspondiente a la Figura 1.\\
+\\
+\begin{center}
+    \includegraphics[scale=0.7]{Imagenes/EJ4/prol.JPG}
+\end{center}
+(a) Repetir la simulación 10 veces.¿Cuantos terminaron en el vértice c?\\
+\\
+Se pudo observar que de las 10 simulaciones, solo 3 terminaron en el vértice C.
+\begin{center}
+    \includegraphics[scale=0.7]{Imagenes/EJ4/1a.JPG}
+\end{center}
+(b) Comparar con el resultado exacto de la probabilidad a largo plazo de visitar a C.\\
+\\
+La probabilidad de visitar a C en 10 simulaciones es $P(X_1_0=C) = 0.2224783$, a comparación de la probabilidad a largo plazo de visitar C, la cual corresponde a $P(X_n=C)=0.2222222$ con n un valor muy grande.
+\begin{center}
+    \includegraphics[scale=0.7]{Imagenes/EJ4/1b.JPG}
+\end{center}
+\begin{center}
+    {\underline{\LARGE\textsf{Ejercicio Número 5:}}}
+\end{center}
+Hay $k$ canciones en el reproductor de música de María. El reproductor está seteado en un modo $shuffle$, en el cual las canciones se eligen aleatoriamente, de forma uniforme, con reemplazo. Por lo tanto, las repeticiones de canciones es posible.\\
+Sea $X_n$ el número de canciones no repetidas que han sido escuchadas después de la n-ésima reproducción.\\
+\\
+(a) Mostrar que \{$X_n : n \in \mathbb{N}$\} es una cadena de markov y determinar la matriz de transición.\\
+\\
+Para probar que \{$X_n : n \in \mathbb{N}$\} es una cadena de markov se debe corroborar lo siguiente:
+\begin{enumerate}
+    \item Los instantes de observación deben ser infinitos numerables.
+    \item Espacio de estados discretos.
+    \item $P(N_n_+_1 = j / N_0=i_0, N_1=i_1, ..., N_n=i_n) = P(N_n_+_1=j/N_n = i_n)$
+\end{enumerate} 
+La condición 1) se cumple, pues los instantes de observación se basan en los números naturales, los cuales son infinitos numerables. El item 2) también es válido porque hablamos de una cantidad finita de canciones. Por último falta corroborar el item 3), a continuación se verá:\\
+\\
+Antes hay que tener en cuenta dos resultados que ayudarán a la demostración:
+\begin{itemize}
+    \item Resultado (1): $N_n_+_1=X_1+X_2+...+X_n+X_n_+_1$
+    \item Resultado (2): $P(N_n_+_1=j/N_n=i_n) = \frac{P(N_n_+_1=j,N_n=i_n)}{P(N_n=i_n}=\frac{P(X_n_+_1 = j-i_n,N_n=i_n)}{P(N_n=i_n)} = \frac{P(X_n_+_1=j-i_n)P(N_n=i_n)}{P(N_n=i_n)} = P(X_n_+_1=j-i_n)$
+\end{itemize}\\
+\begin{center}
+$P(N_n_+_1 = j / N_0=i_0, N_1=i_1, ..., N_n=i_n) {(1) \atop =}$\\$ P(N_n+X_n_+_1=j / N_0=i_0,...,N_n=i_n) =$\\$ P(X_n_+_1+i_n=j/N_0=i_0,...,N_n = i_n) =\\ P(X_n_+_1=j-i_n / N_0=i_0,...,N_n=i_n) = P(X_n+1=j/N_n=i_n) {(2) \atop =}$\\$ P(N_n_+_1=j/N_n=i_n) $
+\end{center}
+Por lo tanto queda demostrado el item 3). Lo cual termina mostrando que es una cadena de markov.\\
+A continuación, la matriz de transición correspondiente:
+\begin{center}
+    \includegraphics[scale=0.3]{Imagenes/EJ5/a.JPG}
+    \\
+    \includegraphics[scale=0.7]{Imagenes/EJ5/1a.JPG}
+\end{center}
+\\
+(b) Si María tiene cuatro canciones en su reproductor de música, encontrar la probabilidad de que todas las canciones sean escuchadas después de 6 reproducciones.\\
+\\
+La probabilidad de que halla oído las cuatro canciones después de 6 reproducciones es $P(X_6=4) = 0.7407407$ .
+\begin{center}
+    \includegraphics[scale=0.7]{Imagenes/EJ5/1b.JPG}
+\end{center}
+\begin{center}
+    {\underline{\LARGE\textsf{Ejercicio Número 6:}}}
+\end{center}
+Se tiran 5 dados y se ponen a un lado aquellos que mostraron un 6. Los restantes se lanzan nuevamente y se repite el procedimiento, poniendo a un lado aquellos dados que muestran un 6, y así sucesivamente.\\
+Sea $X_n$ el número de dados en los que salió 6 después de $n$ tiradas.\\
+\\
+(a) Describir la matriz de transición $P$ para la cadena de markov.\\
+\begin{center}
+    \includegraphics[scale=0.3]{Imagenes/EJ6/matriz1a.JPG}
+\end{center}
+Donde $Y_n$ se define como la cantidad de dados que mostraron 6 de un total de n dados en una tirada. La cual posee distribución binomial con paramétros n y p = 1/6(Probabilidad de sacar 6 en un dado normal). $Y_n = Bi(n,1/6)$
+\begin{center}
+    \includegraphics[scale=0.7]{Imagenes/EJ6/a.JPG}
+    \includegraphics[scale=0.7]{Imagenes/EJ6/grafo6.jpeg}
+\end{center}
+\\
+(b) Encontrar la probabilidad de obtener todos 6 en tres jugadas.\\
+\\
+La probabilidad de obtener todos 6 en tres tiradas es $P(X_3=5) = 0.01327206$ 
+\begin{center}
+    \includegraphics[scale=0.7]{Imagenes/EJ6/1b.JPG}
+\end{center}
+(c) ¿Cómo se espera que sea $P^1^0^0$? Confirmar la respuesta utilizando R.\\
+\\
+Al estimar con 100 tiradas, lo que debería ocurrir es que la probabilidad de obtener todos los 6 sea muy alta, además de que las demás probabilidades muy bajas o casi nulas, puesto que después de 100 tiradas es muy probable que hallan salido los 5 dados con 6.
+\begin{center}
+    \includegraphics[scale=0.7]{Imagenes/EJ6/c1.JPG}
+\end{center}
+La respuesta de R es la siguiente:
+\begin{center}
+    \includegraphics[scale=0.7]{Imagenes/EJ6/c2.JPG}
+\end{center}
+La cual coincide plenamente con lo anterior dicho.
+\begin{center}
+    {\underline{\LARGE\textsf{Ejercicio Número 7:}}}
+\end{center}
+Considerar la caminata aleatoria en \{0,...,k\}, la cual se mueve a la izquierda o a la derecha con probabilidades $p$ y $q$, respectivamente. Si el proceso está en 0, transiciona a 1 en el siguiente paso. Si el proceso está en $k$, transiciona a $k-1$ en el siguiente paso. Esto se llama caminata aleatoria con límites reflectantes. Asumir que $k$=3, $q$=1/4, $p$=3/4 y la distribución inicial es uniforme.\\
+\\
+(a) Calcular la matriz de transición.\\
+\\
+La matriz de transición respectiva es la siguiente:
+\begin{center}
+    \includegraphics[scale=0.3]{Imagenes/EJ7/itema.JPG}
+    \includegraphics[scale=0.7]{Imagenes/EJ7/a2.JPG}
+\end{center}
+Y en la cual se puede observar un grafo del siguiente estilo:
+\begin{center}
+    \includegraphics[scale=0.7]{Imagenes/EJ7/grafo7.jpeg}
+\end{center}
+(b) Encontrar $P(X_7=1 | X_0=3,X_2=2,X_4=2)$.\\
+\\
+
+$P(X_7=1 | X_0=3,X_2=2,X_4=2) = \frac{P(X_7=1) \cap P(X_0=3,X_2=2,X_4=2)}{P(X_0=3,X_2=2,X_4=2)} =\\
+\\
+= \frac{P(X_7=1, X_0=3, X_2=2, X_4=2)}{P(X_0=3, X_2=2, X_4=2)} = \frac{P(X_0=3)*P^2(3,2)*P^2(2,2)*P^3(2,1)}{P(X_0=3)*P^2(3,2)*P^2(2,2)} =\\
+\\
+= \frac{0.25 * 0 * 0.9375 * 0.25}{0.25 * 0 * 0.9375} = \frac{0}{0}$ Indeterminación\\
+\\
+\underline{Cálculos Auxiliares:}\\
+$P^2(3,2) = P(3,2)*P(2,2) = 1*0 = 0$\\
+\\
+$P^2(2,2) = P(2,1)*P(1,2) + P(2,3)*P(3,2) = q*p + p*1 = 1/4 * 3/4 + 1/4 =\\
+= 0.9375$\\
+\\
+$P^3(2,1) = P(2,3)*P(3,2)*P(2,1) + P(2,1)*P(1,0)*P(0,1) =\\
+= p*1*q + q*q*1 = 3/4*1/4 + 1/4*1/4 = 0.25$\\
+\\
+El resultado dió indeterminación por lo que se puede entender que no es posible obtener tal probabilidad ya que no existe una caminata con esas condiciones.\\
+\\
+(c) Encontrar $P(X_3 = 1,X_5 = 3)$.\\
+\\
+$P(X_3=1,X_5=3) = P(X_3=1) * P(1,2)*P(2,3) = (\pi_0 * (CA^3))(1) * p*p =\\
+= 0.1032715 $\\
+\\
+\underline{Cálculos Auxiliares:}\\
+$P(X_3=1) = (\pi_0 * (CA^3))(1)$
+\begin{center}
+    \includegraphics[scale=0.7]{Imagenes/EJ7/c.JPG}
+\end{center}
+\\
+\begin{center}
+    {\underline{\LARGE\textsf{Ejercicio Número 8:}}}
+\end{center}
+Los administradores de datos de una universidad desarrollaron un modelo markoviano para simular los índices de graduación en la institución. Los estudiantes pueden abandonar, repetir un año o pasar al año siguiente. Todos tienen un 3\% de chance de repetir el año. Aquellos que se encuentran en primer o segundo año, tienen una chance del 6\% de abandonar. Para estudiantes de tercer y cuarto año, el índice de abandono es de 4\%.\\
+\\
+(a) Clasificar los estados.\\
+\\
+\begin{center}
+    \includegraphics[scale=0.7]{Imagenes/EJ8/plota.jpeg}
+\end{center}
+Se puede observar en el grafo que los estados A y G son cerrados, recurrentes y absorbentes. Mientras que los estados 1, 2, 3 y 4 son transitorios.\\
+\\
+(b) Establecer la matriz de transición de un paso.\\
+\\
+La matriz correspondiente al grafo anterior es:
+\begin{center}
+    \includegraphics[scale=0.3]{Imagenes/EJ8/matriz.JPG}
+    \includegraphics[scale=0.7]{Imagenes/EJ8/rr.JPG}
+\end{center}
+(c) Determinar el número promedio de años que un estudiante que ingresa en primer año permanece en la institución antes de abandonar o recibirse.\\
+\\
+Para determinar el promedio de años que un estudiante permanece en la institución, se deberán sumar los números promedios de los años que se tardan en cursar cada año universitario. En otras palabras es la suma de los promedios de visitas al estado $j$ que la cadena realiza cuando parte de $i$, donde en este ejercicio $j=1,...,4$ y  $i=1$.\\
+Promedio = $R(1,1)+R(1,2)+R(1,3)+R(1,4)$, donde $R = (I - UN)^-^1$
+\begin{center}
+    Donde I-UN = \includegraphics[scale=0.3]{Imagenes/EJ8/r.JPG}
+\end{center}
+Es evidente ver que la matriz I-UN es singular, por lo cual no podremos calcular R. Por lo que se calculará la matriz $R1 = (I - T)^-^1$, donde T es la matriz de estados transitivos. 
+\begin{center}
+    Donde (I-T) = \includegraphics[scale=0.3]{Imagenes/EJ8/id-t.JPG}
+\end{center}
+La cual es no singular, por lo que si se podrá obtener R1.
+\begin{center}
+    R1 = \includegraphics[scale=0.3]{Imagenes/EJ8/r1.JPG}
+\end{center}
+De aquí se podrá calcular el promedio de años de cursado de un estudiante que ingresa en primer año, cual valor corresponde a,\\
+\\
+Promedio = $R1(1,1) + R1(1,2) + R1(1,3) + R1(1,4) =\\
+= 1.030928 + 0.967159 + 0.907334 + 0.869919 = 3.77534$
+\\
+\\
+Se puede observar que el tiempo promedio que permanece un alumno en la institución desde que arranca en primer año es 3.77534 años, es decir casi un total 4 años.
+\begin{center}
+    \includegraphics[scale=0.6]{Imagenes/EJ8/prom.JPG}
+\end{center}
+\begin{center}
+    {\underline{\LARGE\textsf{Ejercicio Número 9:}}}
+\end{center}
+El modelo Wright-Fisher describe la evolución de una población fija de $k$ genes. Los genes pueden ser de uno de dos tipos, llamados alelos: A o a. Sea $X_n$ el número de alelos A en la población en el momento $n$, donde el tiempo se mide por generaciones. Bajo este modelo, el número de alelos A en el momento $n+1$ se obtiene muestreando con reemplazo desde la población de genes en el momento $n$. Por lo tanto, habiendo $i$ alelos de tipo A en el momento $n$, el número de alelos en el momento $n+1$ tiene una distribución binomial con parámetros $k$ y $p=i/k$. Esto resulta en una cadena de markov con matriz de transición definida por:\\
+\begin{center}
+    $P_i_j = {k \choose j}(\frac{i}{k})^j(1-\frac{i}{k})^k^-^j $, para $0 \leq i,j \leq k.$  (1)
+\end{center}\\
+\\
+(a) Simular este proceso para algún valor de k.\\
+\\
+Considerar k=5 y n=50 para realizar la simulación :\\
+\begin{center}
+    \includegraphics[scale=0.7]{Imagenes/EJ9/tray.jpeg}
+\end{center}
+Se observa que para esta simulación la población termina con todos alelos de tipo a.
+\begin{center}
+    \includegraphics[scale=0.65]{Imagenes/EJ9/ra.JPG}
+\end{center}
+Cuyo grafo se representa:
+\begin{center}
+    \includegraphics[scale=0.7]{Imagenes/EJ9/Rplot9.jpeg}
+\end{center}
+El anterior grafo clasifica los estados de esta cadena, siendo 0(Alelo a) y 5(Alelo A) estados recurrentes, cerrados y absorbentes. Mientras que los estados 1, 2, 3 y 4 son transitorios.\\
+\\
+(b) Observar qué valor toma $P_0_0$ y $P_k_k$.\\
+\\
+La matriz de transición correspondiente a la cadena es:
+\begin{center}
+     \includegraphics[scale=0.3]{Imagenes/EJ9/matriz.JPG}
+\end{center}
+Donde se observa el valor $P_0_0 = 1$ y $P_5_5 = 1$.\\
+\\
+(c) Cuando la cadena progresa, la población, en algún momento, termina con todos alelos a (estado 0) o todos alelos A (estado $k$). Determinar cuál es la probabilidad de que la población evolucione al estado $k$.\\
+\\
+Como la cadena no es irreducible, no se podrá obtener la distribución limite, por lo que se estimará con un valor muy alto para obtener una aproximación lo bastante exacta. Tomando a k=5, y n=500, se tiene:\\
+\begin{itemize}
+    \item $WF^5^0^0(0,5) = 0$
+    \item $WF^5^0^0(1,5) = 0.2$
+    \item $WF^5^0^0(2,5) = 0.4$
+    \item $WF^5^0^0(3,5) = 0.6$
+    \item $WF^5^0^0(4,5) = 0.8$
+    \item $WF^5^0^0(5,5) = 1$
+\end{itemize}
+\begin{center}
+    \includegraphics[scale=0.7]{Imagenes/EJ9/c.JPG}
+\end{center}
+\begin{center}
+    {\underline{\LARGE\textsf{Ejercicio Número 10:}}}
+\end{center}
+El día de la elección, las personas participaron en un centro de votaciones de acuerdo con un proceso de Poisson. El promedio, 100 votantes llegan cada hora.\\
+\\
+(a) Si 150 personas arribaron durante la primer hora, ¿qué probabilidad hay de que al menos 350 votantes arriban antes de las 3 horas?\\
+\\
+Consideremos la variable $X_n$: "Número de votantes que arriban en n horas".\\
+\\
+$P(X_3\geq350 / X_1=150) = P(X_3-X_1 \geq 350-150) =\\
+\\
+= P(X_2 \geq 200) = 1 - P(X_2 < 200) = 1 - \sum_{j=0}^{200} \frac{e^-^\lambda^s (\lambda*s)^j}{j!} =\\
+\\
+= 1 - \sum_{j=0}^{200} \frac{e^-^1^0^0^*^2 (100*2)^j}{j!} = 1 - \sum_{j=0}^{200} \frac{e^-^2^0^0 (200)^j}{j!} = 1 - 0.5187943 = 0.4812057 $
+\begin{center}
+    \includegraphics[scale=0.7]{Imagenes/EJ10/a.JPG}
+\end{center}
+\\
+(b) Simular dicho proceso y graficar una trayectoria.\\
+\\
+A continuación se hará una simulación de una elección, la cual será de s = 10 horas y $\lambda$ = 100 votantes por hora.
+\begin{center}
+    \includegraphics[scale=0.7]{Imagenes/EJ10/plotb.jpeg}
+    \includegraphics[scale=0.7]{Imagenes/EJ10/b.JPG}
+\end{center}
+\\
+(c) Considerar la variable aleatoria: tiempo entre arribos. Obtener los valores a través de simulación y graficar. Determinar qué distribución tiene el tiempo entre arribos de votantes.\\
+\\
+\begin{center}
+    \includegraphics[scale=0.7]{Imagenes/EJ10/cc.JPG}
+    \includegraphics[scale=0.7]{Imagenes/EJ10/histc.jpeg}
+\end{center}
+\begin{center}
+    \includegraphics[scale=0.7]{Imagenes/EJ10/plotc.jpeg}
+\end{center}
+Con el histograma anteriormente mostrado se puede observar una distribución exponencial en lo que respecta a la variable tiempo entre arribos.
+\end{document}
